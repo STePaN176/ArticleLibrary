@@ -7,13 +7,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.LEADING;
 
-public class AddEditFrame extends JFrame {
+
+public class EditFrame extends JFrame {
     JLabel labelCode = new JLabel("Код");
     JLabel labelName = new JLabel("Наименование");
     JLabel labelKeyWords = new JLabel("Ключевые слова");
@@ -27,11 +26,11 @@ public class AddEditFrame extends JFrame {
     JComboBox comboBoxJournal = new JComboBox();
     JComboBox comboBoxResearchMethod = new JComboBox();
 
-    JButton btn_Add = new JButton("Добавить");
+    JButton btnAdd = new JButton("Добавить");
+    JButton btnBack = new JButton("Назад");
 
-    public AddEditFrame() {
+    public EditFrame() {
         setVisible(true);
-        setBounds(300, 300, 650, 240);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -46,15 +45,17 @@ public class AddEditFrame extends JFrame {
                         .addComponent(labelName)
                         .addComponent(labelKeyWords)
                         .addComponent(labelJournal)
-                        .addComponent(labelResearchMethod))
+                        .addComponent(labelResearchMethod)
+                        .addComponent(btnBack))
+
                 .addGroup(layoutSecond.createParallelGroup(LEADING)
                         .addComponent(textFieldCode)
                         .addComponent(textFieldName)
                         .addComponent(textFieldKeyWords)
                         .addComponent(comboBoxJournal)
                         .addComponent(comboBoxResearchMethod)
-                        .addComponent(btn_Add))
 
+                        .addComponent(btnAdd))
         );
 
         layoutSecond.setVerticalGroup(layoutSecond.createSequentialGroup()
@@ -73,30 +74,28 @@ public class AddEditFrame extends JFrame {
                 .addGroup(layoutSecond.createParallelGroup(BASELINE)
                         .addComponent(labelResearchMethod)
                         .addComponent(comboBoxResearchMethod))
-
-                .addContainerGap(12,15)
-                .addComponent(btn_Add)
+                .addContainerGap(12, 15)
+                .addGroup(layoutSecond.createParallelGroup(BASELINE)
+                        .addComponent(btnBack)
+                        .addComponent(btnAdd))
         );
 
-        btn_Add.addActionListener(new ButtonAddArticleListner());
+        btnAdd.addActionListener(new ButtonAddArticleListner());
+
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false); // выклчюаем фрейм редактирования
+                Main.app.setVisible(true); // включаем фрейм поиска
+                Main.app.setBounds(getX(), getY(), getWidth(), getHeight());
+            }
+        });
     }
 
     class ButtonAddArticleListner implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-
-
-            removeAll();
-            dispose();
-
-            JOptionPane.showMessageDialog(null,"Запись добавлена");
-
-
-
-
-
-
+            JOptionPane.showMessageDialog(null, "Запись добавлена");
         }
     }
+
 }

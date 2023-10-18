@@ -5,13 +5,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
+
 public class Main {
     static HashMap<String, String> codeName = new HashMap<>();
     static HashMap<String, String> codeKeyWords = new HashMap<>();
+    public static MenuFrame app = new MenuFrame();
 
     public static void main(String[] args) throws IOException {
-        SimpleGUI app = new SimpleGUI();
         app.setVisible(true);
+        app.setBounds(300, 300, 650, 240);
         System.out.println("Запущено");
 
         Connection connection = null;
