@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         SimpleGUI app = new SimpleGUI();
         app.setVisible(true);
-        System.out.println("sad");
+        System.out.println("Запущено");
 
         Connection connection = null;
         try {
