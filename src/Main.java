@@ -1,17 +1,46 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    static HashMap<String, String> codeName = new HashMap<>();
+    static HashMap<String, String> codeKeyWords = new HashMap<>();
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+    public static void main(String[] args) throws IOException {
+        SimpleGUI app = new SimpleGUI();
+        app.setVisible(true);
+        System.out.println("sad");
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        Connection connection = null;
+        try {
+            // Загрузка драйвера SQLite JDBC
+            Class.forName("org.sqlite.JDBC");
+
+            // Создание соединения с базой данных
+            connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/AleksashinDO/MyProject/ArticleLibrary/DB/ArticleLibraryDb.db");
+            System.out.println("Соединение с базой данных успешно установлено");
+            String query = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT NOT NULL, age INTEGER)";
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Таблица создана успешно");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Не удалось найти драйвер SQLite JDBC");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Не удалось установить соединение с базой данных");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Ошибка при закрытии соединения с базой данных");
+                e.printStackTrace();
+            }
         }
     }
 }
