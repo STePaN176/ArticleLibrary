@@ -5,13 +5,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.Container;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.GroupLayout.Alignment.BASELINE;
-import static javax.swing.GroupLayout.Alignment.LEADING;
+import static javax.swing.GroupLayout.Alignment.*;
 
 
 public class SearchFrame extends JFrame {
@@ -27,18 +24,14 @@ public class SearchFrame extends JFrame {
 
     JComboBox comboBoxJournal = new JComboBox();
     JComboBox comboBoxResearchMethod = new JComboBox();
-    JButton btnFind = new JButton("Поиск");
-    JButton btnCancel = new JButton("Очистить");
-    JButton btnAdd = new JButton("Добавить");
-    JButton btnBack = new JButton("Назад");
+
+    JButton btnFind = new JButton(" Поиск ");
+    JButton btnClear = new JButton("Очистить");
+    JButton btnBack = new JButton("  Назад   ");
 
     public SearchFrame() {
-        super("Поиск статьи");
         setBounds(Main.app.getX(), Main.app.getY(), Main.app.getWidth(), Main.app.getHeight());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        Container container = getContentPane();
-        container.setLayout(new GridLayout());
 
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -60,14 +53,13 @@ public class SearchFrame extends JFrame {
                         .addComponent(textFieldKeyWords)
                         .addComponent(comboBoxJournal)
                         .addComponent(comboBoxResearchMethod))
-                .addGroup(layout.createParallelGroup(LEADING)
+                .addGroup(layout.createParallelGroup(CENTER)
                         .addComponent(btnFind)
-                        .addComponent(btnCancel)
-                        .addComponent(btnAdd)
+                        .addComponent(btnClear)
                         .addComponent(btnBack))
         );
 
-        layout.linkSize(SwingConstants.HORIZONTAL, btnFind, btnCancel);
+        layout.linkSize(SwingConstants.HORIZONTAL, btnFind, btnClear);
 
 
         // Создание вертикальной группы
@@ -79,35 +71,21 @@ public class SearchFrame extends JFrame {
                         .addGroup(layout.createParallelGroup(BASELINE)
                                 .addComponent(labelName)
                                 .addComponent(textFieldName)
-                                .addComponent(btnCancel))
-//                        .addContainerGap(30,30)
+                                .addComponent(btnClear))
                         .addGroup(layout.createParallelGroup(BASELINE)
                                 .addComponent(labelKeyWords)
                                 .addComponent(textFieldKeyWords))
                         .addGroup(layout.createParallelGroup(BASELINE)
                                 .addComponent(labelJournal)
-                                .addComponent(comboBoxJournal)
-                                .addComponent(btnAdd))
+                                .addComponent(comboBoxJournal))
                         .addGroup(layout.createParallelGroup(BASELINE)
                                 .addComponent(labelResearchMethod)
                                 .addComponent(comboBoxResearchMethod)
                                 .addComponent(btnBack))
         );
 
-        btnCancel.addActionListener(new ButtonClearListner());
+        btnClear.addActionListener(new ButtonClearListner());
         btnFind.addActionListener(new ButtonSearchListner());
-
-        btnAdd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                EditFrame frame = new EditFrame();
-                frame.setTitle("Добавить запись");
-                setVisible(false);
-                frame.setVisible(true);
-                frame.setBounds(getX(), getY(), getWidth(), getHeight());
-
-
-            }
-        });
 
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -125,23 +103,15 @@ public class SearchFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             textFieldCode.setText("");
+            textFieldName.setText("");
+            textFieldKeyWords.setText("");
         }
     }
 
     class ButtonSearchListner implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String searchWord = textFieldCode.getText();
-            Main.codeKeyWords.get(searchWord);
-            Main.codeName.get(searchWord);
-            EditFrame frame = new EditFrame();
-            frame.textFieldCode.setText(textFieldCode.getText());
-            frame.textFieldKeyWords.setText(Main.codeKeyWords.get(searchWord));
-            frame.textFieldName.setText(Main.codeName.get(searchWord));
-            frame.textFieldCode.setEnabled(false);
-            frame.textFieldKeyWords.setEnabled(false);
-            frame.textFieldName.setEnabled(false);
-            frame.btnAdd.setVisible(false);
+
         }
     }
 

@@ -1,15 +1,8 @@
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.GroupLayout.Alignment.BASELINE;
-import static javax.swing.GroupLayout.Alignment.LEADING;
+import static javax.swing.GroupLayout.Alignment.*;
 
 
 public class EditFrame extends JFrame {
@@ -27,60 +20,71 @@ public class EditFrame extends JFrame {
     JComboBox comboBoxResearchMethod = new JComboBox();
 
     JButton btnAdd = new JButton("Добавить");
-    JButton btnBack = new JButton("Назад");
+    JButton btnClear = new JButton("Очистить ");
+    JButton btnBack = new JButton("    Назад   ");
 
     public EditFrame() {
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        GroupLayout layoutSecond = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layoutSecond);
-        layoutSecond.setAutoCreateGaps(true);
-        layoutSecond.setAutoCreateContainerGaps(true);
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
 
-        layoutSecond.setHorizontalGroup(layoutSecond.createSequentialGroup()
-                .addGroup(layoutSecond.createParallelGroup(LEADING)
+        layout.setHorizontalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(LEADING)
                         .addComponent(labelCode)
                         .addComponent(labelName)
                         .addComponent(labelKeyWords)
                         .addComponent(labelJournal)
-                        .addComponent(labelResearchMethod)
-                        .addComponent(btnBack))
-
-                .addGroup(layoutSecond.createParallelGroup(LEADING)
+                        .addComponent(labelResearchMethod))
+                .addGroup(layout.createParallelGroup(LEADING)
                         .addComponent(textFieldCode)
                         .addComponent(textFieldName)
                         .addComponent(textFieldKeyWords)
                         .addComponent(comboBoxJournal)
-                        .addComponent(comboBoxResearchMethod)
-
-                        .addComponent(btnAdd))
-        );
-
-        layoutSecond.setVerticalGroup(layoutSecond.createSequentialGroup()
-                .addGroup(layoutSecond.createParallelGroup(BASELINE)
-                        .addComponent(labelCode)
-                        .addComponent(textFieldCode))
-                .addGroup(layoutSecond.createParallelGroup(BASELINE)
-                        .addComponent(labelName)
-                        .addComponent(textFieldName))
-                .addGroup(layoutSecond.createParallelGroup(BASELINE)
-                        .addComponent(labelKeyWords)
-                        .addComponent(textFieldKeyWords))
-                .addGroup(layoutSecond.createParallelGroup(BASELINE)
-                        .addComponent(labelJournal)
-                        .addComponent(comboBoxJournal))
-                .addGroup(layoutSecond.createParallelGroup(BASELINE)
-                        .addComponent(labelResearchMethod)
                         .addComponent(comboBoxResearchMethod))
-                .addContainerGap(12, 15)
-                .addGroup(layoutSecond.createParallelGroup(BASELINE)
-                        .addComponent(btnBack)
-                        .addComponent(btnAdd))
+                .addGroup(layout.createParallelGroup(CENTER)
+                        .addComponent(btnClear)
+                        .addComponent(btnAdd)
+                        .addComponent(btnBack))
         );
+
+        layout.linkSize(SwingConstants.HORIZONTAL, btnClear);
+
+
+        // Создание вертикальной группы
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelCode)
+                        .addComponent(textFieldCode)
+                        .addComponent(btnAdd)
+                )
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelName)
+                        .addComponent(textFieldName)
+                        .addComponent(btnClear)
+                )
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelKeyWords)
+                        .addComponent(textFieldKeyWords)
+                )
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelJournal)
+                        .addComponent(comboBoxJournal)
+                )
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelResearchMethod)
+                        .addComponent(comboBoxResearchMethod)
+                        .addComponent(btnBack)
+                )
+        );
+
 
         btnAdd.addActionListener(new ButtonAddArticleListner());
+        btnClear.addActionListener(new ButtonClearListner());
 
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -91,6 +95,7 @@ public class EditFrame extends JFrame {
         });
     }
 
+
     class ButtonAddArticleListner implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -98,4 +103,12 @@ public class EditFrame extends JFrame {
         }
     }
 
+    class ButtonClearListner implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            textFieldCode.setText("");
+            textFieldName.setText("");
+            textFieldKeyWords.setText("");
+        }
+    }
 }

@@ -1,27 +1,23 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.GroupLayout.Alignment.BASELINE;
-import static javax.swing.GroupLayout.Alignment.LEADING;
+import static javax.swing.GroupLayout.Alignment.*;
 
 
 public class MethodAnalysisFrame extends JFrame {
 
 
-    JLabel labelMethod  = new JLabel("Метод анализа");
-    JTextField textFieldMethod  = new JTextField();
-    JButton btnCancel = new JButton("Очистить");
+    JLabel labelMethod = new JLabel("Название метода анализа");
+    JTextField textFieldMethod = new JTextField();
+    JLabel empty = new JLabel("                   ");
     JButton btnAdd = new JButton("Добавить");
-    JButton btnBack = new JButton("Назад");
+    JButton btnClear = new JButton("Очистить");
+    JButton btnBack = new JButton("   Назад   ");
 
     public MethodAnalysisFrame() {
         setBounds(Main.app.getX(), Main.app.getY(), Main.app.getWidth(), Main.app.getHeight());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        Container container = getContentPane();
-        container.setLayout(new GridLayout());
 
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -32,33 +28,40 @@ public class MethodAnalysisFrame extends JFrame {
         // Создание горизонтальной группы
         layout.setHorizontalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(LEADING)
-
                         .addComponent(labelMethod))
                 .addGroup(layout.createParallelGroup(LEADING)
                         .addComponent(textFieldMethod))
-                .addGroup(layout.createParallelGroup(LEADING)
-                        .addComponent(btnCancel)
+                .addGroup(layout.createParallelGroup(CENTER)
                         .addComponent(btnAdd)
+                        .addComponent(btnClear)
+                        .addComponent(empty)
+                        .addComponent(empty)
+                        .addComponent(empty)
                         .addComponent(btnBack))
         );
 
-        layout.linkSize(SwingConstants.HORIZONTAL, btnCancel);
+        layout.linkSize(SwingConstants.HORIZONTAL, btnClear);
 
 
         // Создание вертикальной группы
         layout.setVerticalGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(btnCancel))
-//                        .addContainerGap(30,30)
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(labelMethod)
-                                .addComponent(btnAdd))
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(textFieldMethod)
-                                .addComponent(btnBack))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelMethod)
+                        .addComponent(textFieldMethod)
+                        .addComponent(btnAdd))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(btnClear))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(btnBack))
         );
 
-        btnCancel.addActionListener(new ButtonClearListner());
+        btnClear.addActionListener(new ButtonClearListner());
 
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -80,7 +83,7 @@ public class MethodAnalysisFrame extends JFrame {
             }
         });
 
-        setTitle("Метод анализа");
+        setTitle("Добавить метод анализа");
 
     }
 

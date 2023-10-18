@@ -1,28 +1,23 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.GroupLayout.Alignment.BASELINE;
-import static javax.swing.GroupLayout.Alignment.LEADING;
+import static javax.swing.GroupLayout.Alignment.*;
 
 
 public class ScienceJournalFrame extends JFrame {
 
 
-    JLabel labelJournal = new JLabel("Научный журнал");
-    JTextField textFieldJournal = new JTextField();
-    JButton btnCancel = new JButton("Очистить");
+    JLabel labelJournal = new JLabel("Название журнала");
+    JLabel empty = new JLabel("                   ");
+    JTextField textFieldNameJournal = new JTextField();
     JButton btnAdd = new JButton("Добавить");
-    JButton btnBack = new JButton("Назад");
+    JButton btnClear = new JButton("Очистить");
+    JButton btnBack = new JButton("   Назад   ");
 
     public ScienceJournalFrame() {
-        super("Научный журнал");
         setBounds(Main.app.getX(), Main.app.getY(), Main.app.getWidth(), Main.app.getHeight());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        Container container = getContentPane();
-        container.setLayout(new GridLayout());
 
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -33,33 +28,41 @@ public class ScienceJournalFrame extends JFrame {
         // Создание горизонтальной группы
         layout.setHorizontalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(LEADING)
-
                         .addComponent(labelJournal))
                 .addGroup(layout.createParallelGroup(LEADING)
-                        .addComponent(textFieldJournal))
-                .addGroup(layout.createParallelGroup(LEADING)
-                        .addComponent(btnCancel)
+                        .addComponent(textFieldNameJournal))
+                .addGroup(layout.createParallelGroup(CENTER)
                         .addComponent(btnAdd)
+                        .addComponent(btnClear)
+                        .addComponent(empty)
+                        .addComponent(empty)
+                        .addComponent(empty)
                         .addComponent(btnBack))
+
         );
 
-        layout.linkSize(SwingConstants.HORIZONTAL, btnCancel);
+        layout.linkSize(SwingConstants.HORIZONTAL, btnClear);
 
 
         // Создание вертикальной группы
         layout.setVerticalGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(btnCancel))
-//                        .addContainerGap(30,30)
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(labelJournal)
-                                .addComponent(btnAdd))
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(textFieldJournal)
-                                .addComponent(btnBack))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(textFieldNameJournal)
+                        .addComponent(labelJournal)
+                        .addComponent(btnAdd))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(btnClear))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(btnBack))
         );
 
-        btnCancel.addActionListener(new ButtonClearListner());
+        btnClear.addActionListener(new ButtonClearListner());
 
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -81,25 +84,25 @@ public class ScienceJournalFrame extends JFrame {
             }
         });
 
-        setTitle("Научный журнал");
+        setTitle("Добавить научный журнал");
 
     }
 
     class ButtonClearListner implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textFieldJournal.setText("");
+            textFieldNameJournal.setText("");
         }
     }
 
     class ButtonSearchListner implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String searchWord = textFieldJournal.getText();
+            String searchWord = textFieldNameJournal.getText();
             Main.codeKeyWords.get(searchWord);
             Main.codeName.get(searchWord);
             EditFrame frame = new EditFrame();
-            frame.textFieldCode.setText(textFieldJournal.getText());
+            frame.textFieldCode.setText(textFieldNameJournal.getText());
             frame.textFieldKeyWords.setText(Main.codeKeyWords.get(searchWord));
             frame.textFieldName.setText(Main.codeName.get(searchWord));
             frame.textFieldCode.setEnabled(false);

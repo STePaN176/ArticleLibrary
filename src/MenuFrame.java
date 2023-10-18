@@ -1,26 +1,22 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.GroupLayout.Alignment.BASELINE;
-import static javax.swing.GroupLayout.Alignment.LEADING;
+import static javax.swing.GroupLayout.Alignment.*;
 
 
 public class MenuFrame extends JFrame {
 
-    JButton btnFind = new JButton("Поиск");
-    JButton btnAddArticle = new JButton("Добавить статью");
+    JButton btnFind = new JButton("            Поиск статьи              ");
+    JButton btnAddArticle = new JButton("          Добавить статью         ");
     JButton btnAddAJournal = new JButton("Добавить научный журнал");
-    JButton btnAddAMethod = new JButton("Добавить метод анализа");
+    JButton btnAddAMethod = new JButton("  Добавить метод анализа  ");
+    JButton btnSetting = new JButton("                Настройки                ");
+    JLabel empty = new JLabel("                                                                     ");
 
 
     public MenuFrame() {
-        setBounds(300, 300, 1000, 455);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        Container container = getContentPane();
-        container.setLayout(new GridLayout());
 
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -31,30 +27,44 @@ public class MenuFrame extends JFrame {
         // Создание горизонтальной группы
         layout.setHorizontalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(LEADING)
+                        .addComponent(empty)
+                        .addComponent(empty)
+                        .addComponent(empty)
+                        .addComponent(empty)
+                        .addComponent(empty)
+                )
+                .addGroup(layout.createParallelGroup(CENTER)
                         .addComponent(btnFind)
                         .addComponent(btnAddArticle)
                         .addComponent(btnAddAJournal)
                         .addComponent(btnAddAMethod)
+                        .addComponent(btnSetting)
+
                 )
         );
 
         // Создание вертикальной группы
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty)
                         .addComponent(btnFind))
                 .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty)
                         .addComponent(btnAddArticle))
                 .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty)
                         .addComponent(btnAddAJournal))
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(btnAddAMethod)
-                )
+                        .addComponent(empty)
+                        .addComponent(btnAddAMethod))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(empty)
+                        .addComponent(btnSetting))
         );
 
         btnFind.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SearchFrame frame = new SearchFrame();
-                frame.setTitle("Поиск статьи");
                 frame.setVisible(true);
                 frame.setBounds(getX(), getY(), getWidth(), getHeight());
                 setVisible(false);
@@ -65,7 +75,6 @@ public class MenuFrame extends JFrame {
         btnAddArticle.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 EditFrame frame = new EditFrame();
-                frame.setTitle("Добавить запись");
                 frame.setVisible(true);
                 frame.setBounds(getX(), getY(), getWidth(), getHeight());
                 setVisible(false);
@@ -77,7 +86,6 @@ public class MenuFrame extends JFrame {
         btnAddAJournal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ScienceJournalFrame frame = new ScienceJournalFrame();
-                frame.setTitle("Добавить запись");
                 frame.setVisible(true);
                 frame.setBounds(getX(), getY(), getWidth(), getHeight());
                 setVisible(false);
@@ -89,7 +97,6 @@ public class MenuFrame extends JFrame {
         btnAddAMethod.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 MethodAnalysisFrame frame = new MethodAnalysisFrame();
-                frame.setTitle("Добавить запись");
                 frame.setVisible(true);
                 frame.setBounds(getX(), getY(), getWidth(), getHeight());
                 setVisible(false);
@@ -98,7 +105,7 @@ public class MenuFrame extends JFrame {
             }
         });
 
-        setTitle("Библиотека");
+        setTitle("Библиотека статей");
     }
 
     class ButtonSearchListner implements ActionListener {

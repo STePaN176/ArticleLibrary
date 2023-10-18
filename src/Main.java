@@ -12,7 +12,7 @@ public class Main {
     public static MenuFrame app = new MenuFrame();
 
     public static void main(String[] args) throws IOException {
-        app.setBounds(300, 300, 650, 240);
+        app.setBounds(400, 400, 650, 215);
         app.setVisible(true);
         System.out.println("Запущено");
 
