@@ -17,7 +17,12 @@ public class MenuFrame extends JFrame {
 
     public MenuFrame() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        initLayoyt();
+        initActionListenerButton();
+        setTitle("Библиотека статей");
+    }
 
+    protected void initLayoyt() {
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -39,7 +44,6 @@ public class MenuFrame extends JFrame {
                         .addComponent(btnAddAJournal)
                         .addComponent(btnAddAMethod)
                         .addComponent(btnSetting)
-
                 )
         );
 
@@ -47,76 +51,57 @@ public class MenuFrame extends JFrame {
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(empty)
-                        .addComponent(btnFind))
+                        .addComponent(btnFind)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(empty)
-                        .addComponent(btnAddArticle))
+                        .addComponent(btnAddArticle)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(empty)
-                        .addComponent(btnAddAJournal))
+                        .addComponent(btnAddAJournal)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(empty)
-                        .addComponent(btnAddAMethod))
+                        .addComponent(btnAddAMethod)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(empty)
-                        .addComponent(btnSetting))
+                        .addComponent(btnSetting)
+                )
         );
+    }
 
+    protected void initActionListenerButton() {
         btnFind.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SearchFrame frame = new SearchFrame();
-                frame.setVisible(true);
-                frame.setBounds(getX(), getY(), getWidth(), getHeight());
-                setVisible(false);
-
+                actionPerform(new SearchFrame());
             }
         });
 
         btnAddArticle.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                EditFrame frame = new EditFrame();
-                frame.setVisible(true);
-                frame.setBounds(getX(), getY(), getWidth(), getHeight());
-                setVisible(false);
-
-
+                actionPerform(new EditFrame());
             }
         });
 
         btnAddAJournal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ScienceJournalFrame frame = new ScienceJournalFrame();
-                frame.setVisible(true);
-                frame.setBounds(getX(), getY(), getWidth(), getHeight());
-                setVisible(false);
-
-
+                actionPerform(new ScienceJournalFrame());
             }
         });
 
         btnAddAMethod.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MethodAnalysisFrame frame = new MethodAnalysisFrame();
-                frame.setVisible(true);
-                frame.setBounds(getX(), getY(), getWidth(), getHeight());
-                setVisible(false);
-
-
+                actionPerform(new MethodAnalysisFrame());
             }
         });
-
-        setTitle("Библиотека статей");
     }
 
-    class ButtonSearchListner implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            EditFrame frame = new EditFrame();
-            frame.textFieldCode.setEnabled(false);
-            frame.textFieldKeyWords.setEnabled(false);
-            frame.textFieldName.setEnabled(false);
-            frame.btnAdd.setVisible(false);
-        }
+    public void actionPerform(JFrame frame) {
+        frame.setVisible(true);
+        frame.setBounds(getX(), getY(), getWidth(), getHeight());
+        setVisible(false);
     }
 
 }

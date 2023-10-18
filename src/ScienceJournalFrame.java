@@ -18,7 +18,12 @@ public class ScienceJournalFrame extends JFrame {
     public ScienceJournalFrame() {
         setBounds(Main.app.getX(), Main.app.getY(), Main.app.getWidth(), Main.app.getHeight());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        initLayout();
+        initActionListenerButton();
+        setTitle("Добавить научный журнал");
+    }
 
+    protected void initLayout() {
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -28,54 +33,55 @@ public class ScienceJournalFrame extends JFrame {
         // Создание горизонтальной группы
         layout.setHorizontalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(LEADING)
-                        .addComponent(labelJournal))
+                        .addComponent(labelJournal)
+                )
                 .addGroup(layout.createParallelGroup(LEADING)
-                        .addComponent(textFieldNameJournal))
+                        .addComponent(textFieldNameJournal)
+                )
                 .addGroup(layout.createParallelGroup(CENTER)
                         .addComponent(btnAdd)
                         .addComponent(btnClear)
                         .addComponent(empty)
                         .addComponent(empty)
                         .addComponent(empty)
-                        .addComponent(btnBack))
-
+                        .addComponent(btnBack)
+                )
         );
 
         layout.linkSize(SwingConstants.HORIZONTAL, btnClear);
-
 
         // Создание вертикальной группы
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(textFieldNameJournal)
                         .addComponent(labelJournal)
-                        .addComponent(btnAdd))
+                        .addComponent(btnAdd)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(btnClear))
+                        .addComponent(btnClear)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(empty))
+                        .addComponent(empty)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(empty))
+                        .addComponent(empty)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(empty))
+                        .addComponent(empty)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(btnBack))
+                        .addComponent(btnBack)
+                )
         );
+    }
 
+    protected void initActionListenerButton() {
         btnClear.addActionListener(new ButtonClearListner());
-
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                EditFrame frame = new EditFrame();
-//                frame.setTitle("Добавить запись");
-//                setVisible(false);
-//                frame.setVisible(true);
-//                frame.setBounds(getX(), getY(), getWidth(), getHeight());
-
 
             }
         });
-
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Main.app.setVisible(true); // включаем фрейм поиска
@@ -83,9 +89,6 @@ public class ScienceJournalFrame extends JFrame {
                 setVisible(false); // выклчюаем фрейм редактирования
             }
         });
-
-        setTitle("Добавить научный журнал");
-
     }
 
     class ButtonClearListner implements ActionListener {

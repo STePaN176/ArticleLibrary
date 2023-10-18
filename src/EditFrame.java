@@ -27,7 +27,12 @@ public class EditFrame extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        initLayout();
+        initActionListenerButton();
+        setTitle("Добавление статьи");
+    }
 
+    protected void initLayout() {
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
@@ -39,21 +44,23 @@ public class EditFrame extends JFrame {
                         .addComponent(labelName)
                         .addComponent(labelKeyWords)
                         .addComponent(labelJournal)
-                        .addComponent(labelResearchMethod))
+                        .addComponent(labelResearchMethod)
+                )
                 .addGroup(layout.createParallelGroup(LEADING)
                         .addComponent(textFieldCode)
                         .addComponent(textFieldName)
                         .addComponent(textFieldKeyWords)
                         .addComponent(comboBoxJournal)
-                        .addComponent(comboBoxResearchMethod))
+                        .addComponent(comboBoxResearchMethod)
+                )
                 .addGroup(layout.createParallelGroup(CENTER)
                         .addComponent(btnClear)
                         .addComponent(btnAdd)
-                        .addComponent(btnBack))
+                        .addComponent(btnBack)
+                )
         );
 
         layout.linkSize(SwingConstants.HORIZONTAL, btnClear);
-
 
         // Создание вертикальной группы
         layout.setVerticalGroup(layout.createSequentialGroup()
@@ -81,11 +88,11 @@ public class EditFrame extends JFrame {
                         .addComponent(btnBack)
                 )
         );
+    }
 
-
+    protected void initActionListenerButton() {
         btnAdd.addActionListener(new ButtonAddArticleListner());
         btnClear.addActionListener(new ButtonClearListner());
-
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Main.app.setVisible(true); // включаем фрейм поиска
@@ -94,7 +101,6 @@ public class EditFrame extends JFrame {
             }
         });
     }
-
 
     class ButtonAddArticleListner implements ActionListener {
         @Override

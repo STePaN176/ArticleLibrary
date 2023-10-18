@@ -7,7 +7,6 @@ import static javax.swing.GroupLayout.Alignment.*;
 
 public class MethodAnalysisFrame extends JFrame {
 
-
     JLabel labelMethod = new JLabel("Название метода анализа");
     JTextField textFieldMethod = new JTextField();
     JLabel empty = new JLabel("                   ");
@@ -18,7 +17,12 @@ public class MethodAnalysisFrame extends JFrame {
     public MethodAnalysisFrame() {
         setBounds(Main.app.getX(), Main.app.getY(), Main.app.getWidth(), Main.app.getHeight());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        initLayout();
+        initActionListenerButton();
+        setTitle("Добавить метод анализа");
+    }
 
+    protected void initLayout() {
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -28,53 +32,55 @@ public class MethodAnalysisFrame extends JFrame {
         // Создание горизонтальной группы
         layout.setHorizontalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(LEADING)
-                        .addComponent(labelMethod))
+                        .addComponent(labelMethod)
+                )
                 .addGroup(layout.createParallelGroup(LEADING)
-                        .addComponent(textFieldMethod))
+                        .addComponent(textFieldMethod)
+                )
                 .addGroup(layout.createParallelGroup(CENTER)
                         .addComponent(btnAdd)
                         .addComponent(btnClear)
                         .addComponent(empty)
                         .addComponent(empty)
                         .addComponent(empty)
-                        .addComponent(btnBack))
+                        .addComponent(btnBack)
+                )
         );
 
         layout.linkSize(SwingConstants.HORIZONTAL, btnClear);
-
 
         // Создание вертикальной группы
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(labelMethod)
                         .addComponent(textFieldMethod)
-                        .addComponent(btnAdd))
+                        .addComponent(btnAdd)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(btnClear))
+                        .addComponent(btnClear)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(empty))
+                        .addComponent(empty)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(empty))
+                        .addComponent(empty)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(empty))
+                        .addComponent(empty)
+                )
                 .addGroup(layout.createParallelGroup(BASELINE)
-                        .addComponent(btnBack))
+                        .addComponent(btnBack)
+                )
         );
+    }
 
+    protected void initActionListenerButton() {
         btnClear.addActionListener(new ButtonClearListner());
-
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                EditFrame frame = new EditFrame();
-//                frame.setTitle("Добавить запись");
-//                setVisible(false);
-//                frame.setVisible(true);
-//                frame.setBounds(getX(), getY(), getWidth(), getHeight());
-
 
             }
         });
-
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Main.app.setVisible(true); // включаем фрейм поиска
@@ -82,9 +88,6 @@ public class MethodAnalysisFrame extends JFrame {
                 setVisible(false); // выклчюаем фрейм редактирования
             }
         });
-
-        setTitle("Добавить метод анализа");
-
     }
 
     class ButtonClearListner implements ActionListener {

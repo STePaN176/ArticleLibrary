@@ -1,10 +1,4 @@
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,7 +26,12 @@ public class SearchFrame extends JFrame {
     public SearchFrame() {
         setBounds(Main.app.getX(), Main.app.getY(), Main.app.getWidth(), Main.app.getHeight());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        initLayout();
+        initActionListenerButton();
+        setTitle("Поиск статьи");
+    }
 
+    protected void initLayout() {
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,47 +45,55 @@ public class SearchFrame extends JFrame {
                         .addComponent(labelName)
                         .addComponent(labelKeyWords)
                         .addComponent(labelJournal)
-                        .addComponent(labelResearchMethod))
+                        .addComponent(labelResearchMethod)
+                )
                 .addGroup(layout.createParallelGroup(LEADING)
                         .addComponent(textFieldCode)
                         .addComponent(textFieldName)
                         .addComponent(textFieldKeyWords)
                         .addComponent(comboBoxJournal)
-                        .addComponent(comboBoxResearchMethod))
+                        .addComponent(comboBoxResearchMethod)
+                )
                 .addGroup(layout.createParallelGroup(CENTER)
                         .addComponent(btnFind)
                         .addComponent(btnClear)
-                        .addComponent(btnBack))
+                        .addComponent(btnBack)
+                )
         );
 
         layout.linkSize(SwingConstants.HORIZONTAL, btnFind, btnClear);
 
-
         // Создание вертикальной группы
         layout.setVerticalGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(labelCode)
-                                .addComponent(textFieldCode)
-                                .addComponent(btnFind))
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(labelName)
-                                .addComponent(textFieldName)
-                                .addComponent(btnClear))
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(labelKeyWords)
-                                .addComponent(textFieldKeyWords))
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(labelJournal)
-                                .addComponent(comboBoxJournal))
-                        .addGroup(layout.createParallelGroup(BASELINE)
-                                .addComponent(labelResearchMethod)
-                                .addComponent(comboBoxResearchMethod)
-                                .addComponent(btnBack))
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelCode)
+                        .addComponent(textFieldCode)
+                        .addComponent(btnFind)
+                )
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelName)
+                        .addComponent(textFieldName)
+                        .addComponent(btnClear)
+                )
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelKeyWords)
+                        .addComponent(textFieldKeyWords)
+                )
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelJournal)
+                        .addComponent(comboBoxJournal)
+                )
+                .addGroup(layout.createParallelGroup(BASELINE)
+                        .addComponent(labelResearchMethod)
+                        .addComponent(comboBoxResearchMethod)
+                        .addComponent(btnBack)
+                )
         );
+    }
 
+    protected void initActionListenerButton() {
         btnClear.addActionListener(new ButtonClearListner());
         btnFind.addActionListener(new ButtonSearchListner());
-
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Main.app.setVisible(true); // включаем фрейм поиска
@@ -94,10 +101,8 @@ public class SearchFrame extends JFrame {
                 setVisible(false); // выклчюаем фрейм редактирования
             }
         });
-
-        setTitle("Поиск статьи");
-
     }
+
 
     class ButtonClearListner implements ActionListener {
         @Override
