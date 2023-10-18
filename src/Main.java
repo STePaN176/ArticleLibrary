@@ -12,37 +12,37 @@ public class Main {
     public static MenuFrame app = new MenuFrame();
 
     public static void main(String[] args) throws IOException {
-        app.setVisible(true);
         app.setBounds(300, 300, 650, 240);
+        app.setVisible(true);
         System.out.println("Запущено");
 
         Connection connection = null;
-        try {
-            // Загрузка драйвера SQLite JDBC
-            Class.forName("org.sqlite.JDBC");
-
-            // Создание соединения с базой данных
-            connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/AleksashinDO/MyProject/ArticleLibrary/DB/ArticleLibraryDb.db");
-            System.out.println("Соединение с базой данных успешно установлено");
-            String query = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT NOT NULL, age INTEGER)";
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(query);
-            System.out.println("Таблица создана успешно");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Не удалось найти драйвер SQLite JDBC");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Не удалось установить соединение с базой данных");
-            e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Ошибка при закрытии соединения с базой данных");
-                e.printStackTrace();
-            }
-        }
+//        try {
+//            // Загрузка драйвера SQLite JDBC
+//            Class.forName("org.sqlite.JDBC");
+//
+//            // Создание соединения с базой данных
+//            connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/AleksashinDO/MyProject/ArticleLibrary/DB/ArticleLibraryDb.db");
+//            System.out.println("Соединение с базой данных успешно установлено");
+//            String query = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT NOT NULL, age INTEGER)";
+//            Statement statement = connection.createStatement();
+//            statement.executeUpdate(query);
+//            System.out.println("Таблица создана успешно");
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Не удалось найти драйвер SQLite JDBC");
+//            e.printStackTrace();
+//        } catch (SQLException e) {
+//            System.out.println("Не удалось установить соединение с базой данных");
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (connection != null) {
+//                    connection.close();
+//                }
+//            } catch (SQLException e) {
+//                System.out.println("Ошибка при закрытии соединения с базой данных");
+//                e.printStackTrace();
+//            }
+//        }
     }
 }

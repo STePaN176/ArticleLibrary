@@ -84,9 +84,9 @@ public class EditFrame extends JFrame {
 
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setVisible(false); // выклчюаем фрейм редактирования
                 Main.app.setVisible(true); // включаем фрейм поиска
                 Main.app.setBounds(getX(), getY(), getWidth(), getHeight());
+                setVisible(false); // выклчюаем фрейм редактирования
             }
         });
     }
