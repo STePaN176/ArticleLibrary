@@ -16,7 +16,7 @@ public class ScienceJournalFrame extends JFrame {
     JButton btnBack = new JButton("   Назад   ");
 
     public ScienceJournalFrame() {
-        setBounds(Main.app.getX(), Main.app.getY(), Main.app.getWidth(), Main.app.getHeight());
+        setBounds(Main.appFrame.getX(), Main.appFrame.getY(), Main.appFrame.getWidth(), Main.appFrame.getHeight());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initLayout();
         initActionListenerButton();
@@ -84,8 +84,8 @@ public class ScienceJournalFrame extends JFrame {
         });
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Main.app.setVisible(true); // включаем фрейм поиска
-                Main.app.setBounds(getX(), getY(), getWidth(), getHeight());
+                Main.appFrame.setVisible(true); // включаем фрейм поиска
+                Main.appFrame.setBounds(getX(), getY(), getWidth(), getHeight());
                 setVisible(false); // выклчюаем фрейм редактирования
             }
         });
