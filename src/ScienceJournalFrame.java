@@ -1,3 +1,5 @@
+import entity.ScienceJournal;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +9,7 @@ import static javax.swing.GroupLayout.Alignment.*;
 
 public class ScienceJournalFrame extends JFrame {
 
-
+    ScienceJournal Journal = new ScienceJournal();
     JLabel labelJournal = new JLabel("Название журнала");
     JLabel empty = new JLabel("                   ");
     JTextField textFieldNameJournal = new JTextField();

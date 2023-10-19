@@ -1,3 +1,5 @@
+import entity.ScienceJournal;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +8,8 @@ import static javax.swing.GroupLayout.Alignment.*;
 
 
 public class SearchFrame extends JFrame {
+
+    ScienceJournal Journal = new ScienceJournal();
     JLabel labelCode = new JLabel("Код");
     JLabel labelName = new JLabel("Наименование");
     JLabel labelKeyWords = new JLabel("Ключевые слова");
