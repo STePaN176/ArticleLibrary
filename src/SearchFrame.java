@@ -1,8 +1,14 @@
+import db.DbHandler;
 import entity.ScienceJournal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Collections;
+import java.util.List;
 
 import static javax.swing.GroupLayout.Alignment.*;
 
@@ -20,8 +26,8 @@ public class SearchFrame extends JFrame {
     JTextField textFieldName = new JTextField();
     JTextField textFieldKeyWords = new JTextField();
 
-    JComboBox comboBoxJournal = new JComboBox();
-    JComboBox comboBoxResearchMethod = new JComboBox();
+    JComboBox <String> comboBoxJournal = new JComboBox<>();
+    JComboBox <String> comboBoxResearchMethod = new JComboBox<>();
 
     JButton btnFind = new JButton(" Поиск ");
     JButton btnClear = new JButton("Очистить");
@@ -32,6 +38,7 @@ public class SearchFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initLayout();
         initActionListenerButton();
+        initComboBox();
         setTitle("Поиск статьи");
     }
 
@@ -122,6 +129,21 @@ public class SearchFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
         }
+    }
+
+    protected void initComboBox(){
+        try {
+            DbHandler dbHandler = DbHandler.getInstance();
+            List<ScienceJournal> journals = dbHandler.getAllJournals();
+            for (ScienceJournal journal : journals) {
+                comboBoxJournal.addItem(journal.toString());
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        comboBoxJournal.setEditable(false);
     }
 
 }

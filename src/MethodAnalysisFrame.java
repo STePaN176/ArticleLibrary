@@ -101,12 +101,8 @@ public class MethodAnalysisFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             String searchWord = textFieldMethod.getText();
-            Main.codeKeyWords.get(searchWord);
-            Main.codeName.get(searchWord);
             EditFrame frame = new EditFrame();
             frame.textFieldCode.setText(textFieldMethod.getText());
-            frame.textFieldKeyWords.setText(Main.codeKeyWords.get(searchWord));
-            frame.textFieldName.setText(Main.codeName.get(searchWord));
             frame.textFieldCode.setEnabled(false);
             frame.textFieldKeyWords.setEnabled(false);
             frame.textFieldName.setEnabled(false);

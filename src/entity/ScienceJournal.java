@@ -46,7 +46,6 @@ public class ScienceJournal {
     // Выводим информацию по продукту
     @Override
     public String toString() {
-        return String.format("ID: %s | Журнал: %s",
-                this.id, this.journal_name);
+        return String.format("%s",this.journal_name);
     }
 }
