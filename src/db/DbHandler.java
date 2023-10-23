@@ -6,13 +6,9 @@ import org.sqlite.JDBC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 public class DbHandler {
 
@@ -31,49 +27,49 @@ public class DbHandler {
         return instance;
     }
 
-    // Объект, в котором будет храниться соединение с БД
-    private Connection connection;
 
-    private DbHandler() throws SQLException {
-        // Регистрируем драйвер, с которым будем работать
-        // в нашем случае Sqlite
+//        Connection connection = null;
+//        try {
+//            boolean newDb = false;
+    // Загрузка драйвера SQLite JDBC
+//            Class.forName("org.sqlite.JDBC");
+
+    // Создание соединения с базой данных
+//            connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/AleksashinDO/MyProject/ArticleLibrary/DB/ArticleLibraryDb.db");
+
+
+
+    // Объект, в котором будет храниться соединение с БД
+    private Connection connection = null;
+
+    public DbHandler() throws SQLException {
+        // Регистрируем драйвер Sqlite
         DriverManager.registerDriver(new JDBC());
         // Выполняем подключение к базе данных
         this.connection = DriverManager.getConnection(CON_STR);
     }
 
-    public List<ScienceJournal> getAllProducts() {
+    public void initSQL() {
         // Statement используется для того, чтобы выполнить sql-запрос
         try (Statement statement = this.connection.createStatement()) {
-            // В данный список будем загружать наши продукты, полученные из БД
-            List<ScienceJournal> products = new ArrayList<ScienceJournal>();
-            // В resultSet будет храниться результат нашего запроса,
-            // который выполняется командой statement.executeQuery()
-            ResultSet resultSet = statement.executeQuery("SELECT id, journal_name from science_journal");
-            // Проходимся по нашему resultSet и заносим данные в products
-            while (resultSet.next()) {
-                products.add(new ScienceJournal(resultSet.getInt("id"),
-//                        resultSet.getDate(2),
-                        resultSet.getString("journal_name")));
-            }
-//            deleteProduct(1);
-            // Возвращаем наш список
-            return products;
+            statement.executeUpdate(createTableScienceJournal());
+            statement.executeUpdate(createTableMethodAnalysis());
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Если произошла ошибка - возвращаем пустую коллекцию
-            return Collections.emptyList();
         }
     }
 
+
     // Добавление продукта в БД
-    public void addProduct(ScienceJournal product) {
+    public void addScienceJournal(String journal_name) {
         // Создадим подготовленное выражение, чтобы избежать SQL-инъекций
         try (PreparedStatement statement = this.connection.prepareStatement(
-                "INSERT INTO Products(`category_name`) " +
-                        "VALUES(?)")) {
-            statement.setObject(1, product.journal_name);
+                "INSERT INTO science_journal(journal_name, create_ts) " +
+                        "VALUES(?), '"+ new Date() +"'")) {
+            statement.setObject(1, journal_name);
+
+
             // Выполняем запрос
             statement.execute();
         } catch (SQLException e) {
@@ -91,5 +87,13 @@ public class DbHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String createTableScienceJournal(){
+        return "CREATE TABLE science_journal ( id INTEGER PRIMARY KEY,create_ts DATE, journal_name VARCHAR(255) NOT NULL)";
+    }
+
+    public String createTableMethodAnalysis(){
+        return "CREATE TABLE method_analysis ( id INTEGER PRIMARY KEY,create_ts DATE, method_analysisFrame VARCHAR(255) NOT NULL)";
     }
 }

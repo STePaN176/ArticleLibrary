@@ -1,16 +1,9 @@
 import db.DbHandler;
-import entity.ScienceJournal;
-import org.sqlite.SQLiteException;
 
-import javax.management.OperationsException;
 import java.awt.Frame;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class Main {
@@ -34,17 +27,10 @@ public class Main {
 
 
             try {
-                // Создаем экземпляр по работе с БД
+                // выполняем скрипты
                 DbHandler dbHandler = DbHandler.getInstance();
-                // Добавляем запись
-                //dbHandler.addProduct(new Product("Музей", 200, "Развлечения"));
-                // Получаем все записи и выводим их на консоль
-                List<ScienceJournal> journals = dbHandler.getAllProducts();
-                for (ScienceJournal journal : journals) {
-                    System.out.println(journal.toString());
-                }
-                // Удаление записи с id = 8
-                //dbHandler.deleteProduct(8);
+                dbHandler.initSQL();
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }

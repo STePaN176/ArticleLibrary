@@ -1,8 +1,11 @@
+import db.DbHandler;
 import entity.ScienceJournal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Date;
 
 import static javax.swing.GroupLayout.Alignment.*;
 
@@ -81,7 +84,14 @@ public class ScienceJournalFrame extends JFrame {
         btnClear.addActionListener(new ButtonClearListner());
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    DbHandler add = new DbHandler();
+                    add.addScienceJournal(textFieldNameJournal.getText());
+                    new Date();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                textFieldNameJournal.setText("");
             }
         });
         btnBack.addActionListener(new ActionListener() {
