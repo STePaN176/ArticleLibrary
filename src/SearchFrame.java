@@ -1,4 +1,5 @@
 import db.DbHandler;
+import entity.MethodAnalysis;
 import entity.ScienceJournal;
 
 import javax.swing.*;
@@ -121,6 +122,8 @@ public class SearchFrame extends JFrame {
             textFieldCode.setText("");
             textFieldName.setText("");
             textFieldKeyWords.setText("");
+            comboBoxJournal.setSelectedIndex(0);
+            comboBoxResearchMethod.setSelectedIndex(0);
         }
     }
 
@@ -138,12 +141,17 @@ public class SearchFrame extends JFrame {
             for (ScienceJournal journal : journals) {
                 comboBoxJournal.addItem(journal.toString());
             }
+            List<MethodAnalysis> methodAnalysis = dbHandler.getAllMethodAnalysis();
+            for (MethodAnalysis methodAnalys : methodAnalysis) {
+                comboBoxResearchMethod.addItem(methodAnalys.toString());
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         comboBoxJournal.setEditable(false);
+        comboBoxResearchMethod.setEditable(false);
     }
 
 }

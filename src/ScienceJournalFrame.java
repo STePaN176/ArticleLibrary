@@ -87,7 +87,6 @@ public class ScienceJournalFrame extends JFrame {
                 try {
                     DbHandler add = new DbHandler();
                     add.addScienceJournal(textFieldNameJournal.getText());
-                    new Date();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

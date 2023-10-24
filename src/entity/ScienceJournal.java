@@ -43,7 +43,6 @@ public class ScienceJournal {
         this.create_ts = create_ts;
     }
 
-    // Выводим информацию по продукту
     @Override
     public String toString() {
         return String.format("%s",this.journal_name);

@@ -1,3 +1,7 @@
+import db.DbHandler;
+import entity.MethodAnalysis;
+import entity.ScienceJournal;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -8,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
 import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.CENTER;
@@ -38,6 +44,7 @@ public class EditFrame extends JFrame {
         setLocationRelativeTo(null);
         initLayout();
         initActionListenerButton();
+        initComboBox();
         setTitle("Добавление статьи");
     }
 
@@ -124,6 +131,28 @@ public class EditFrame extends JFrame {
             textFieldCode.setText("");
             textFieldName.setText("");
             textFieldKeyWords.setText("");
+            comboBoxJournal.setSelectedIndex(0);
+            comboBoxResearchMethod.setSelectedIndex(0);
         }
+    }
+
+    protected void initComboBox(){
+        try {
+            DbHandler dbHandler = DbHandler.getInstance();
+            List<ScienceJournal> journals = dbHandler.getAllJournals();
+            for (ScienceJournal journal : journals) {
+                comboBoxJournal.addItem(journal.toString());
+            }
+            List<MethodAnalysis> methodAnalysis = dbHandler.getAllMethodAnalysis();
+            for (MethodAnalysis methodAnalys : methodAnalysis) {
+                comboBoxResearchMethod.addItem(methodAnalys.toString());
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        comboBoxJournal.setEditable(false);
+        comboBoxResearchMethod.setEditable(false);
     }
 }

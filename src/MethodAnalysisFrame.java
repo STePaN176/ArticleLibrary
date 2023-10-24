@@ -1,6 +1,10 @@
+import db.DbHandler;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Date;
 
 import static javax.swing.GroupLayout.Alignment.*;
 
@@ -78,7 +82,13 @@ public class MethodAnalysisFrame extends JFrame {
         btnClear.addActionListener(new ButtonClearListner());
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    DbHandler add = new DbHandler();
+                    add.addMethodAnalysis(textFieldMethod.getText());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                textFieldMethod.setText("");
             }
         });
         btnBack.addActionListener(new ActionListener() {
