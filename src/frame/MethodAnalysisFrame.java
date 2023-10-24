@@ -1,11 +1,13 @@
+package frame;
+
 import db.DbHandler;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.Date;
 
+import static frame.MenuFrame.appFrame;
 import static javax.swing.GroupLayout.Alignment.*;
 
 
@@ -19,7 +21,7 @@ public class MethodAnalysisFrame extends JFrame {
     JButton btnBack = new JButton("   Назад   ");
 
     public MethodAnalysisFrame() {
-        setBounds(Main.appFrame.getX(), Main.appFrame.getY(), Main.appFrame.getWidth(), Main.appFrame.getHeight());
+        setBounds(appFrame.getX(), appFrame.getY(), appFrame.getWidth(), appFrame.getHeight());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initLayout();
         initActionListenerButton();
@@ -93,8 +95,8 @@ public class MethodAnalysisFrame extends JFrame {
         });
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Main.appFrame.setVisible(true); // включаем фрейм поиска
-                Main.appFrame.setBounds(getX(), getY(), getWidth(), getHeight());
+                appFrame.setVisible(true); // включаем фрейм поиска
+                appFrame.setBounds(getX(), getY(), getWidth(), getHeight());
                 setVisible(false); // выклчюаем фрейм редактирования
             }
         });

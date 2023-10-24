@@ -1,26 +1,25 @@
+package frame;
+
 import db.DbHandler;
 import entity.MethodAnalysis;
 import entity.ScienceJournal;
 
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Collections;
 import java.util.List;
 
-import static javax.swing.GroupLayout.Alignment.BASELINE;
-import static javax.swing.GroupLayout.Alignment.CENTER;
-import static javax.swing.GroupLayout.Alignment.LEADING;
+import static frame.MenuFrame.appFrame;
+import static javax.swing.GroupLayout.Alignment.*;
 
 
-public class EditFrame extends JFrame {
+public class SearchFrame extends JFrame {
+
+    ScienceJournal Journal = new ScienceJournal();
     JLabel labelCode = new JLabel("Код");
     JLabel labelName = new JLabel("Наименование");
     JLabel labelKeyWords = new JLabel("Ключевые слова");
@@ -31,29 +30,30 @@ public class EditFrame extends JFrame {
     JTextField textFieldName = new JTextField();
     JTextField textFieldKeyWords = new JTextField();
 
-    JComboBox comboBoxJournal = new JComboBox();
-    JComboBox comboBoxResearchMethod = new JComboBox();
+    JComboBox <String> comboBoxJournal = new JComboBox<>();
+    JComboBox <String> comboBoxResearchMethod = new JComboBox<>();
 
-    JButton btnAdd = new JButton("Добавить");
-    JButton btnClear = new JButton("Очистить ");
-    JButton btnBack = new JButton("    Назад   ");
+    JButton btnFind = new JButton(" Поиск ");
+    JButton btnClear = new JButton("Очистить");
+    JButton btnBack = new JButton("  Назад   ");
 
-    public EditFrame() {
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+    public SearchFrame() {
+        setBounds(appFrame.getX(), appFrame.getY(), appFrame.getWidth(), appFrame.getHeight());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         initLayout();
         initActionListenerButton();
         initComboBox();
-        setTitle("Добавление статьи");
+        setTitle("Поиск статьи");
     }
 
     protected void initLayout() {
+        // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
+        // Создание горизонтальной группы
         layout.setHorizontalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(LEADING)
                         .addComponent(labelCode)
@@ -70,20 +70,20 @@ public class EditFrame extends JFrame {
                         .addComponent(comboBoxResearchMethod)
                 )
                 .addGroup(layout.createParallelGroup(CENTER)
+                        .addComponent(btnFind)
                         .addComponent(btnClear)
-                        .addComponent(btnAdd)
                         .addComponent(btnBack)
                 )
         );
 
-        layout.linkSize(SwingConstants.HORIZONTAL, btnClear);
+        layout.linkSize(SwingConstants.HORIZONTAL, btnFind, btnClear);
 
         // Создание вертикальной группы
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(labelCode)
                         .addComponent(textFieldCode)
-                        .addComponent(btnAdd)
+                        .addComponent(btnFind)
                 )
                 .addGroup(layout.createParallelGroup(BASELINE)
                         .addComponent(labelName)
@@ -107,23 +107,17 @@ public class EditFrame extends JFrame {
     }
 
     protected void initActionListenerButton() {
-        btnAdd.addActionListener(new ButtonAddArticleListner());
         btnClear.addActionListener(new ButtonClearListner());
+        btnFind.addActionListener(new ButtonSearchListner());
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Main.appFrame.setVisible(true); // включаем фрейм поиска
-                Main.appFrame.setBounds(getX(), getY(), getWidth(), getHeight());
+                appFrame.setVisible(true); // включаем фрейм поиска
+                appFrame.setBounds(getX(), getY(), getWidth(), getHeight());
                 setVisible(false); // выклчюаем фрейм редактирования
             }
         });
     }
 
-    class ButtonAddArticleListner implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "Запись добавлена");
-        }
-    }
 
     class ButtonClearListner implements ActionListener {
         @Override
@@ -133,6 +127,13 @@ public class EditFrame extends JFrame {
             textFieldKeyWords.setText("");
             comboBoxJournal.setSelectedIndex(0);
             comboBoxResearchMethod.setSelectedIndex(0);
+        }
+    }
+
+    class ButtonSearchListner implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
         }
     }
 
@@ -155,4 +156,5 @@ public class EditFrame extends JFrame {
         comboBoxJournal.setEditable(false);
         comboBoxResearchMethod.setEditable(false);
     }
+
 }

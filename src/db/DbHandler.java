@@ -1,5 +1,6 @@
 package db;
 
+import conf.AppConfig;
 import entity.MethodAnalysis;
 import entity.ScienceJournal;
 import org.sqlite.JDBC;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class DbHandler {
 
-    private static final String CON_STR = "jdbc:sqlite:C:/Users/AleksashinDO/MyProject/ArticleLibrary/DB/ArticleLibraryDb.db";
+    private static final String ADRESS_DB = AppConfig.getAdressDb();
 
 
     // Используем шаблон одиночка, чтобы не плодить множество
@@ -37,7 +38,7 @@ public class DbHandler {
         // Регистрируем драйвер Sqlite
         DriverManager.registerDriver(new JDBC());
         // Выполняем подключение к базе данных
-        this.connection = DriverManager.getConnection(CON_STR);
+        this.connection = DriverManager.getConnection(ADRESS_DB);
     }
 
     public void initSQL() {

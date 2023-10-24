@@ -1,4 +1,7 @@
+package frame;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -6,6 +9,8 @@ import static javax.swing.GroupLayout.Alignment.*;
 
 
 public class MenuFrame extends JFrame {
+
+    public static Frame appFrame = new MenuFrame();
 
     JButton btnFind = new JButton("            Поиск статьи              ");
     JButton btnAddArticle = new JButton("          Добавить статью         ");
@@ -16,6 +21,8 @@ public class MenuFrame extends JFrame {
 
 
     public MenuFrame() {
+        setBounds(400, 400, 650, 215);
+        setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initLayoyt();
         initActionListenerButton();
@@ -23,6 +30,7 @@ public class MenuFrame extends JFrame {
     }
 
     protected void initLayoyt() {
+
         // Определение менеджера расположения
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

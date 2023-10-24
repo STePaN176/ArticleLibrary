@@ -1,21 +1,19 @@
 import db.DbHandler;
 
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static frame.MenuFrame.appFrame;
+
 
 public class Main {
-    public static Frame appFrame = new MenuFrame();
 
     public static void main(String[] args) throws IOException {
-        appFrame.setBounds(400, 400, 650, 215);
         appFrame.setVisible(true);
 
         if (true) {
             initDb();
         }
-
     }
 
     protected static void initDb() {
